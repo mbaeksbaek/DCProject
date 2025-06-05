@@ -1,0 +1,18 @@
+
+.env
+
+# git ignore (SSH Key)
+*.pem
+*.key
+.ssh/
+
+# cache files
+__pycache__/
+*.py[cod]
+test*.py
+test_*.py
+# OS files
+.DS_Store
+Thumbs.db
+
+
