@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DCProject: 저장된 토픽 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #AAA;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #EEE;
+        }
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+    </style>
+</head>
+<body>
+    <h1>저장된 토픽 목록 (최신 100개)</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>사이트</th>
+                <th>제목 (Title)</th>
+                <th>내용 (Content)</th>
+                <th>조회 수 (Views)</th>
+                <th>댓글 수 (Comments)</th>
+                <th>토픽 생성 시각</th>
+                <th>메트릭 기록 시각</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if topics and topics|length > 0 %}
+                {% for row in topics %}
+                    <tr>
+                        <td>{{ row.website_name }}</td>
+                        <td>{{ row.title }}</td>
+                        <!-- content는 너무 길 수 있으므로 50자만 보여주고, 나머지는 "…" 처리 -->
+                        <td>{{ row.content[:50] }}{% if row.content|length > 50 %}...{% endif %}</td>
+                        <td>{{ row.view_count }}</td>
+                        <td>{{ row.comment_count }}</td>
+                        <td>{{ row.topic_created }}</td>
+                        <td>{{ row.metric_recorded }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7" style="text-align:center; color:#888;">
+                        저장된 토픽이 없습니다.
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
